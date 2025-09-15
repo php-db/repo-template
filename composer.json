@@ -1,0 +1,70 @@
+{
+    "name": "tyrsson/repo-template",
+    "description": "",
+    "license": "BSD-3-Clause",
+    "keywords": [
+    ],
+    "support": {
+        "issues": "https://github.com/tyrsson/repo-template/issues",
+        "source": "https://github.com/tyrsson/repo-template"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.99"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "laminas/laminas-component-installer": true
+        }
+    },
+    "extra": {
+        "laminas": {
+            "config-provider": ""
+        }
+    },
+    "require": {
+        "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+        "beberlei/assert": "^3.3",
+        "psr/container": "^2.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^3.0.1",
+        "laminas/laminas-servicemanager": "^4.4",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^11.5.0"
+    },
+    "suggest": {
+        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\Foo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AcmeTest\\Foo\\": "test/unit/",
+            "AcmeTestIntegration\\Foo\\": "test/integration/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@static-analysis",
+            "@test",
+            "@test-integration"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always --testsuite \"unit test\"",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "test-integration": "phpunit --colors=always --testsuite \"integration test\"",
+        "static-analysis": "vendor/bin/phpstan analyse",
+        "sa-update-baseline": "vendor/bin/phpstan analyse --generate-baseline",
+        "upload-coverage": "coveralls -v"
+    }
+}
