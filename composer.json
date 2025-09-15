@@ -1,12 +1,13 @@
 {
-    "name": "tyrsson/repo-template",
+    "name": "php-db/phpdb-changeit",
     "description": "",
     "license": "BSD-3-Clause",
     "keywords": [
+        "php-db"
     ],
     "support": {
-        "issues": "https://github.com/tyrsson/repo-template/issues",
-        "source": "https://github.com/tyrsson/repo-template"
+        "issues": "https://github.com/php-db/changeit/issues",
+        "source": "https://github.com/php-db/changeit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -22,33 +23,30 @@
     },
     "extra": {
         "laminas": {
-            "config-provider": ""
+            "config-provider": "PhpDb\\ChangeIt\\ConfigProvider"
         }
     },
     "require": {
-        "php": "~8.2.0 || ~8.3.0 || ~8.4.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
         "beberlei/assert": "^3.3",
         "psr/container": "^2.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "^3.0.1",
         "laminas/laminas-servicemanager": "^4.4",
-        "phpstan/phpstan": "^2.1",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "phpunit/phpunit": "^11.5.0"
-    },
-    "suggest": {
-        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+        "phpunit/phpunit": "^11.5.15",
+        "psalm/plugin-phpunit": "^0.19.2",
+        "vimeo/psalm": "^6.8.8"
     },
     "autoload": {
         "psr-4": {
-            "Acme\\Foo\\": "src/"
+            "PhpDb\\ChangeIt\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AcmeTest\\Foo\\": "test/unit/",
-            "AcmeTestIntegration\\Foo\\": "test/integration/"
+            "PhpDbTest\\ChangeIt\\": "test/unit/",
+            "PhpDbTestIntegration\\ChangeIt\\": "test/integration/"
         }
     },
     "scripts": {
@@ -63,8 +61,9 @@
         "test": "phpunit --colors=always --testsuite \"unit test\"",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "test-integration": "phpunit --colors=always --testsuite \"integration test\"",
-        "static-analysis": "vendor/bin/phpstan analyse",
-        "sa-update-baseline": "vendor/bin/phpstan analyse --generate-baseline",
+        "static-analysis": "psalm --shepherd --stats",
+        "sa-set-baseline": "psalm --set-baseline",
+        "sa-no-baseline": "psalm --shepherd --stats --ignore-baseline",
         "upload-coverage": "coveralls -v"
     }
 }
